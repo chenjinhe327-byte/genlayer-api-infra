@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+import "../ExternalAPIConsumer.sol";
+
+contract SocialMediaService is ExternalAPIConsumer {
+    string public constant API_ID = "SOCIAL_TWITTER";
+    string public socialData;
+
+    function setSocialData(string calldata _data) external onlyOwner {
+        socialData = _data;
+        receiveAPIResponse(API_ID, _data);
+    }
+
+    function getSocialData() external view returns (string memory) {
+        return socialData;
+    }
+}

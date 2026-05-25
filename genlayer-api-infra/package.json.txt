@@ -1,0 +1,19 @@
+{
+  "name": "genlayer-external-api-infra",
+  "version": "1.0.0",
+  "description": "GenLayer 智能合约外部 API 集成库与安全基础设施",
+  "main": "index.js",
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.js"
+  },
+  "dependencies": {
+    "@genlayer/sdk": "^0.1.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "hardhat": "^2.19.0"
+  }
+}

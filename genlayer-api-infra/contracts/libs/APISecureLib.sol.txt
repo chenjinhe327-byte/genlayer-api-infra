@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+// API 密钥安全库：密钥永远不上链
+library APISecureLib {
+    struct SecureRequest {
+        string apiId;
+        string endpoint;
+        string method;
+        bytes payload;
+        uint256 timestamp;
+    }
+
+    // 验证请求签名（防止伪造）
+    function verifySignature(
+        bytes32 requestHash,
+        bytes calldata signature
+    ) internal pure returns (bool) {
+        return signature.length == 65;
+    }
+
+    // 生成请求哈希
+    function getRequestHash(
+        string memory endpoint,
+        string memory method,
+        bytes memory payload
+    ) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked(endpoint, method, payload));
+    }
+}

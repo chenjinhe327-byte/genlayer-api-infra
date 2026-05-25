@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+import "../ExternalAPIConsumer.sol";
+
+contract PriceOracle is ExternalAPIConsumer {
+    string public constant API_ID = "PRICE_COINGECKO";
+    string public price;
+
+    function setPrice(string calldata _price) external onlyOwner {
+        price = _price;
+        receiveAPIResponse(API_ID, _price);
+    }
+
+    function getLatestPrice() external view returns (string memory) {
+        return price;
+    }
+}

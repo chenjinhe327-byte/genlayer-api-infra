@@ -1,0 +1,25 @@
+async function main() {
+  console.log("部署 GenLayer 外部 API 基础设施...");
+
+  const APIConsumer = await ethers.getContractFactory("ExternalAPIConsumer");
+  const api = await APIConsumer.deploy();
+  await api.deployed();
+  console.log("APIConsumer 已部署:", api.address);
+
+  const PriceOracle = await ethers.getContractFactory("PriceOracle");
+  const price = await PriceOracle.deploy();
+  console.log("PriceOracle:", price.address);
+
+  const Weather = await ethers.getContractFactory("WeatherService");
+  const weather = await Weather.deploy();
+  console.log("WeatherService:", weather.address);
+
+  const Social = await ethers.getContractFactory("SocialMediaService");
+  const social = await Social.deploy();
+  console.log("SocialMediaService:", social.address);
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

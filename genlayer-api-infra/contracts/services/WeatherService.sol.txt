@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+import "../ExternalAPIConsumer.sol";
+
+contract WeatherService is ExternalAPIConsumer {
+    string public constant API_ID = "WEATHER_OPENWEATHER";
+    string public weather;
+
+    function setWeather(string calldata _weather) external onlyOwner {
+        weather = _weather;
+        receiveAPIResponse(API_ID, _weather);
+    }
+
+    function getWeather() external view returns (string memory) {
+        return weather;
+    }
+}
